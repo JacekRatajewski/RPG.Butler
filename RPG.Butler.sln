@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPG.Butler.AL", "RPG.Butler.AL\RPG.Butler.AL.csproj", "{72B06F71-7D29-4724-B3AA-C499618D2A17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPG.Butler.BLL", "RPG.Butler.BLL\RPG.Butler.BLL.csproj", "{5565463B-C10D-47EE-AFD2-21BEDE0A3F4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72B06F71-7D29-4724-B3AA-C499618D2A17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72B06F71-7D29-4724-B3AA-C499618D2A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72B06F71-7D29-4724-B3AA-C499618D2A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72B06F71-7D29-4724-B3AA-C499618D2A17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5565463B-C10D-47EE-AFD2-21BEDE0A3F4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5565463B-C10D-47EE-AFD2-21BEDE0A3F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5565463B-C10D-47EE-AFD2-21BEDE0A3F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5565463B-C10D-47EE-AFD2-21BEDE0A3F4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB76E833-5E62-4ACC-AD01-2E544C43F67D}
+	EndGlobalSection
+EndGlobal
