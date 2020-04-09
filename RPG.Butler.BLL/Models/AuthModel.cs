@@ -1,7 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RPG.Butler.BLL.Models
 {
@@ -10,8 +7,12 @@ namespace RPG.Butler.BLL.Models
         public AuthModel(IConfigurationSection configurationSection)
         {
             Token = configurationSection["Token"];
+            Secret = configurationSection["Secret"];
+            GuildId = ulong.Parse(configurationSection["GuildId"]);
         }
 
         public string Token { get; set; }
+        public string Secret { get; set; }
+        public ulong GuildId { get; set; }
     }
 }

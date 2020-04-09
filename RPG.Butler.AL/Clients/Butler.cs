@@ -22,7 +22,6 @@ namespace RPG.Butler.AL.Clients
             _logger = logger;
             _butlerService = butlerService;
             _auth = new AuthModel(configuration.GetSection("DiscordApi"));
-
         }
 
         public async Task RunAsync()
@@ -36,11 +35,10 @@ namespace RPG.Butler.AL.Clients
                     Console.WriteLine("Butler is connected and happy!");
                     return Task.CompletedTask;
                 };
-                _discordCli.Ready += () =>
+                _discordCli.Ready += async () =>
                 {
                     Console.WriteLine("Butler is ready to go!");
                     Console.WriteLine("(type 'exit' to close Butler)");
-                    return Task.CompletedTask;
                 };
                 await _butlerService.Init();
             }

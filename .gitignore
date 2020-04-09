@@ -3,3 +3,7 @@
 ################################################################################
 
 /RPG.Butler.AL/obj
+/RPG.Butler.AL/bin/Debug/netcoreapp3.1
+/.vs/RPG.Butler/v16/TestStore/0
+/RPG.Butler.BLL/bin/Debug/netcoreapp3.1
+/RPG.Butler.BLL/obj

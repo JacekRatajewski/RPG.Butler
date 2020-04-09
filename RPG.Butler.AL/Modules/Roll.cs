@@ -1,83 +1,40 @@
 ﻿using Discord;
 using Discord.Commands;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
+using RPG.Butler.BLL.Interfaces;
+using RPG.Butler.BLL.Models;
+using RPG.Butler.BLL.Services;
 using System.Threading.Tasks;
 
 namespace RPG.Butler.Al.Modules
 {
 	public class Roll : ModuleBase<SocketCommandContext>
-    {
+	{
+		private IRollService _roller;
+
+		public Roll()
+		{
+			_roller = new RollService();
+		}
+
 		[Command("roll")]
 		public async Task RollAsync(string equation)
 		{
-			var total = 0;
-			var totalRolls = "";
-			var diceNumber = Splitter('k', equation, 0);
-			var dice = 0;
-			var add = true;
-			if(equation.Contains('+'))
+			int? modifier = null;
+			var mark = Mark.Get(Mark.CheckForMark(equation) ?? '~');
+			var diceNumber = _roller.Splitter('k', equation, 0) ?? 1;
+			var dice = mark == MarkType.None ? _roller.Splitter('k', equation, 1) : _roller.Splitter('k', equation.Split((char)mark)[0].ToString(), 1);
+			if (mark != MarkType.None)
 			{
-				dice = Splitter('+', equation.Split('k')[1], 0);
-			} else if(equation.Contains('-'))
-			{
-				add = false;
-				dice = Splitter('-', equation.Split('k')[1], 0);
-			} else
-			{
-				dice = Splitter('k', equation, 1);
+				modifier = _roller.Splitter((char)mark, equation, 1);
 			}
-			var modifier = 0;
-			if (equation.Contains('+'))
-			{
-				modifier = Splitter('+', equation.Split('k')[1], 1);
-			}
-			else if (equation.Contains('-'))
-			{
-				modifier = Splitter('-', equation.Split('k')[1], 1);
-			}
-			else
-			{
-				modifier = 0;
-			}
-			Random r = new Random();
-			for (int i = 0; i < diceNumber; i++)
-			{
-				var roll = r.Next(1, dice + 1);
-				total += roll;
-				totalRolls += $" [{roll}] ";
-			}
-			var modifString = "";
-			if(modifier > 0)
-			{
-				var decision = "";
-				if(add)
-				{
-					decision = "+";
-					total += modifier;
-				} else
-				{
-					decision = "-";
-					total -= modifier;
-				}
-				modifString += $" modyfikator dodany do rzutu: [{decision}{modifier}]";
-			}
-			totalRolls = (diceNumber > 1) ? $" składał się z :{totalRolls}" : "";
-
-			Color color = new Color(r.Next(256), r.Next(256), r.Next(256));
+			var rolled = _roller.Roll(diceNumber, dice, mark, modifier);
+			Color color = new Color(_roller.Randomizer.Next(256), _roller.Randomizer.Next(256), _roller.Randomizer.Next(256));
 
 			EmbedBuilder builder = new EmbedBuilder();
-			builder.WithDescription($"Wynik dla ciebie {Context.User.Mention}! : [{total}]{totalRolls}{modifString}!")
+			builder.WithDescription($"Wynik dla ciebie {Context.User.Mention} to : {rolled}!")
 				.WithColor(color);
 
 			await ReplyAsync("", false, builder.Build());
-		}
-
-		private int Splitter(char splitter, string input, int index)
-		{
-			return int.Parse(input.Split(splitter)[index]);
 		}
 	}
 }
